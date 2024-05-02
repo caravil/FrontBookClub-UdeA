@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.production.min.js"></script>
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+    <script src="/scripts/prueba.js"></script>
+
+    <!---Estilo tabla -->
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!---Logos awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <!---Fonts Google -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <title>Página de inicio</title>
+</head>
+
+<body>
+    <!-- Encabezado -->
+    <header>
+        <a href="https://www.udea.edu.co/">
+            <img src="/assets/Logosímbolo+-Universidad-de-Antioquia-horizontal.png" class="img-fluid"
+                alt="Universidad de Antioquia" width="358" height="90">
+        </a>
+    </header>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pages/home.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pages/clubs.html">Clubes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Eventos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Calendario</a>
+                    </li>
+                </ul>  
+                <button class="btn btn-udea-primary" type="button" onclick="redirigir('login.html')">Iniciar sesion</button>
+            </div>
+        </div>''
+    </nav>
+    <!-- Contenido -->
+    <main>
+        <div id="my-table"></div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="copy_footer_info">
+                        <div class="ctn_logo">
+                            <a href="https://www.udea.edu.co/">
+                                <img src="/assets/logo_udea_white.png" class="img-fluid" alt="Universidad de Antioquia"
+                                    width="358" height="90">
+                            </a>
+                        </div>
+                        <br>
+                        <div class="ctn_social">
+                            <a target="_blank"
+                                href="https://www.linkedin.com/school/universidad-de-antioquia/?originalSubdomain=co"
+                                title="Linkedin">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a target="_blank" href="https://www.youtube.com/user/UniversidadAntioquia" title="Youtube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a target="_blank" href="https://twitter.com/UdeA" title="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a target="_blank" href="https://www.facebook.com/universidaddeantioquia/?fref=ts"
+                                title="Facebook">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a target="_blank" href="https://www.instagram.com/udea/" title="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a target="_blank" href="https://www.tiktok.com/@universidaddeantioquia" title="TikTok">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            <a target="_blank" href="https://open.spotify.com/collection/podcasts" title="Spotify">
+                                <i class="fab fa-spotify"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="ctn_body">
+                        <p>
+                            NIT 890980040-8 | Recepción de correspondencia: calle 70 No. 52 - 21 | Apartado Aéreo 1226 |
+                            Dirección:
+                            calle 67 No. 53 - 108 | Medellín - Colombia | Correo notificaciones judiciales:
+                            notificacionesjudiciales@udea.edu.co
+                        </p>
+                        <p>
+                            Vigilada Mineducación Acreditación institucional hasta el 2033
+                        </p>
+                        <p>© Copyright 2023 Todos los Derechos Reservados</p>
+                        <p><a title="Nuestros aliados"></a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

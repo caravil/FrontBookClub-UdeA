@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.production.min.js"></script>
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+    <script src="/scripts/prueba.js"></script>
+    <script src="/scripts/script.js"></script>
+    <script src="/scripts/bookclub.js"></script>
+
+    <!---Estilo tabla -->
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!---Logos awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <!---Fonts Google -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <title>Página de inicio</title>
+</head>
+
+<body>
+    <!-- Encabezado -->
+    <div id="header"></div>
+
+    <!-- Barra de navegación -->
+    <div id="navbar"></div>
+
+    <!-- Contenido -->
+    <main>
+        <div id="my-table"></div>
+    </main>
+
+    <!-- Pie de página -->
+    <div id="footer"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Función para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación
+            function loadAndCacheContent(url, targetId) {
+                fetch(url)
+                    .then(response => response.text())
+                    .then(data => {
+                        localStorage.setItem(targetId, data);
+                        // Insertar el contenido en el elemento con el ID especificado
+                        document.getElementById(targetId).innerHTML = data;
+                        // Delegar eventos de clic a los enlaces dentro del elemento
+                        document.getElementById(targetId).addEventListener("click", function (event) {
+                            if (event.target.tagName === "A") {
+                                window.location.href = event.target.href;
+                            }
+                        });
+                    })
+                    .catch(error => console.error(`Error al cargar ${targetId}:`, error));
+            }
+
+            // Cargar y almacenar en caché el contenido del header
+            loadAndCacheContent('/components/header.html', 'header');
+
+            // Cargar y almacenar en caché el contenido del footer
+            loadAndCacheContent('/components/footer.html', 'footer');
+
+            // Cargar y almacenar en caché el contenido del menú de navegación
+            loadAndCacheContent('/components/navbar.html', 'navbar');
+        });
+    </script>
+
+</body>
+
+</html>
