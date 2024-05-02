@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,13 @@
 
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="/css/styles.css">
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.production.min.js"></script>
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+    <script src="/scripts/prueba.js"></script>
+
 </head>
 
 <body>
@@ -26,6 +34,10 @@
     <!-- Contenido -->
     <main>
         <section>
+            <br>
+            <br>
+        </section>
+        <section>
             <div id="detailsContainer">
                 <!-- Aquí se mostrarán los detalles del club de lectura -->
             </div>
@@ -33,63 +45,54 @@
         <section>
             <div class="container-buttons">
                 <div class="container mt-5 colum">
-                    <button type="button" class="btn btn-primary" type="button" onclick="redirigir('reviews.html')">atras</button>
+                    <button type="button" class="btn  btn-success btn-lg active" type="button">Comentar</button>
                 </div>
                 <div class="container mt-5 colum">
-                    <button  type="button" class="btn btn-warning" type="button" onclick="redirigir('safeReview.html')">Actualizar Reseña</button>
+                    <button type="button" class="btn btn-warning btn-lg active" type="button" onclick="redirigir('/pages/clubs/showBookClubsDetails.html')">Atras</button>
                 </div>
                 <div class="container mt-5 colum">
-                    <button  type="button" class="btn btn-danger" type="button" onclick="redirigir('safeReview.html')">Eliminar Reseña</button>
+                    <button type="button" class="btn  btn-success btn-lg active" type="button" onclick="redirigir('/pages/discussions/createDiscussion.html')">Agregar nueva discusión</button>
                 </div>
+
             </div>
         </section>
     </main>
     <!-- footer -->
     <div id="footer"></div>
-    
+
+    <!-- Script para Obtener los datos de localStorage -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            try {
-                // Obtener los datos de las reseñas del club de lectura de localStorage
-                const serializedData = localStorage.getItem('bookReviewData');
-                const data = JSON.parse(serializedData);
+            // Obtener los datos de las discusiones del club de lectura de localStorage
+            const serializedData = localStorage.getItem('bookClubDiscussions');
+            const data = JSON.parse(serializedData);
+            // Verificar si hay datos
+            if (data) {
+                // Obtener el contenedor donde se mostrarán los detalles de las discusiones
+                const detailsContainer = document.getElementById('detailsContainer');
                 console.log(data)
-                // Verificar si hay datos
-                if (data) {
-                    // Obtener el contenedor donde se mostrarán los detalles de las reseñas
-                    const detailsContainer = document.getElementById('detailsContainer');
-                    
-                    // Crear elementos HTML para mostrar los detalles de las reseñas
-                    const titleElement = document.createElement('h1');
-                    titleElement.textContent = data.data.bookTitle;
-    
-                    const reviewElement = document.createElement('p');
-                    reviewElement.textContent = data.data.review;
-    
-                    const ratingElement = document.createElement('p');
-                    ratingElement.textContent = `Rating: ${data.data.rating}`;
-    
-                    const createdAtElement = document.createElement('p');
-                    createdAtElement.textContent = `Creada el: ${data.data.createdAt}`;
-    
-                    // Agregar los elementos creados al contenedor de detalles
-                    detailsContainer.appendChild(titleElement);
-                    detailsContainer.appendChild(reviewElement);
-                    detailsContainer.appendChild(ratingElement);
-                    detailsContainer.appendChild(createdAtElement);
-    
-                } else {
-                    console.log('No hay reseñas disponibles para mostrar.');
-                }
-    
-                // Opcional: Limpiar los datos almacenados si ya no son necesarios
-                // localStorage.removeItem('bookClubReviews');
-            } catch (error) {
-                console.error("Error al cargar los detalles de la reseña del libro:", error);
+                // Suponiendo que data.data pueda ser un array de discusiones, iteramos sobre cada discusión
+
+                const heading = document.createElement('h1');
+                heading.textContent = data.data.title;
+
+                const description = document.createElement('p');
+                description.textContent = data.data.description;
+
+                const createdAt = document.createElement('p');
+                createdAt.textContent = `Creada el: ${data.data.createdAt}`;
+
+                // Agregar los elementos creados al contenedor de detalles
+                detailsContainer.appendChild(heading);
+                detailsContainer.appendChild(description);
+                detailsContainer.appendChild(createdAt);
+
+            } else {
+                console.log('No hay discusiones disponibles para mostrar.');
             }
         });
     </script>
-    
+
     <!-- Script para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -122,11 +125,7 @@
         });
     </script>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.production.min.js"></script>
-    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
-    <script src="/scripts/prueba.js"></script>
+
 </body>
 
 </html>

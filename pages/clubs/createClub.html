@@ -37,7 +37,7 @@
 
     <!-- Contenido -->
     <main>
-        <div class="container mt-3">
+        <div class="container mt-5">
             <form class="row g-4">
                 <div class="row-md-4">
                     <label for="inputName" class="form-label">Nombre club</label>
@@ -52,26 +52,23 @@
                     <input type="text" class="form-control" id="inputTags" placeholder="Tags">
                 </div>
                 <div class="row-md-4">
-                    <label for="inputLinkMeet" class="form-label">Link Meet</label>
-                    <input type="text" class="form-control" id="inputLinkMeet" placeholder="Intereses">
-                </div>
-                <div class="row-md-4">
-                    <label for="inputAutor" class="form-label">Autor Libro</label>
-                    <input type="text" class="form-control" id="inputAutor" placeholder="Nombre Autor">
+                    <label for="inputLinkImage" class="form-label">Link Imagen</label>
+                    <input type="text" class="form-control" id="inputLinkImage" placeholder="Link Imagen">
                 </div>
                 <div class="row-12">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn btn-primary" onclick= handleFormSubmitRegisterClub()>Guardar</button>
                 </div>
             </form>
         </div>
     </main>
-    
+
     <!-- Pie de página -->
     <div id="footer"></div>
-    
+
     <!-- script -->
-    <script src="navigation.js"></script>
     <script src="/scripts/prueba.js"></script>
+
+    <!-- Script para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Función para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación

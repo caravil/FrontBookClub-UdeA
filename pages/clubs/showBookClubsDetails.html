@@ -17,6 +17,7 @@
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="/css/styles.css">
 </head>
+
 <body>
     <!-- Encabezado -->
     <div id="header"></div>
@@ -26,25 +27,33 @@
 
     <!-- Contenido -->
     <main>
-        <section>
-            <br>
-            <br>
-        </section>
-        <section>
+        <section id="section-details">
             <div id="detailsContainer">
                 <!-- Aquí se mostrarán los detalles del club de lectura -->
             </div>
         </section>
         <section>
             <div class="container-buttons">
-                <div  class="container mt-5 colum">
-                    <button type="button" class="btn btn-success btn-lg active" type="button" onclick="redirigir('reviews.html')">Reseñas</button>
+                <div  class="container colum">
+                    <button type="button" class="btn btn-success btn-lg active" type="button" onclick="redirigir('/pages/reviews/reviews.html')">Reseñas</button>
                 </div>
-                <div class="container mt-5 colum">
-                    <button type="button" class="btn btn-warning btn-lg active" type="button" onclick="redirigir('clubs.html')">Atras</button>
+                <div class="container colum">
+                    <button  type="button" class="btn btn-success btn-lg active" type="button" onclick="redirigir('/pages/discussions/discussions.html')">Discuciones</button>
                 </div>
-                <div class="container mt-5 colum">
-                    <button  type="button" class="btn btn-success btn-lg active" type="button" onclick="redirigir('discussions.html')">Discuciones</button>
+                <div class="container colum">
+                    <button  type="button" class="btn btn-success btn-lg active" type="button" onclick="unirseClub()">Unirme</button>
+                </div>
+                <div class="container  colum">
+                    <button type="button" class="btn btn-success btn-lg active" type="button" onclick="redirigir('/pages/clubs/clubs.html')">Listado Clubes</button>
+                </div>
+                <div class="container  colum">
+                    <button type="button" class="btn btn-success btn-lg active" type="button" onclick="validarYRedirigir('/pages/clubs/createEvent.html')">Crear Reunion</button>
+                </div>
+                <div class="container colum">
+                    <button type="button" class="btn btn-warning btn-lg active" type="button" onclick="validarYRedirigir('/pages/clubs/updateClub.html')">Actualizar Club</button>
+                </div>
+                <div class="container  colum">
+                    <button type="button" class="btn btn-danger btn-lg active" type="button" onclick="deleteClub()">Eliminar Club</button>
                 </div>
             </div>
         </section>
@@ -59,44 +68,58 @@
     <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
     <script src="/scripts/prueba.js"></script>
 
-    <!-- Script para Obtener los datos de localStorage -->
+    <!-- Script para obtener los datos de localStorage y mostrarlos en tarjetas -->
     <script>
-        var globalId;
         document.addEventListener("DOMContentLoaded", function () {
             // Obtener los datos de localStorage
             const serializedData = localStorage.getItem('bookClubData');
+            if (!serializedData) {
+                console.error('No data found in localStorage');
+                return;
+            }
+
             const data = JSON.parse(serializedData);
-
-            // Verificar si hay datos
-            if (data) {
-                // Obtener el contenedor donde se mostrarán los detalles
+            // Verificar si hay datos y si es un objeto
+            if (data && typeof data.data === 'object' && !Array.isArray(data.data)) {
+                // Obtener el contenedor donde se mostrarán las tarjetas
                 const detailsContainer = document.getElementById('detailsContainer');
-                console.log(data)
-                // Crear elementos HTML para mostrar los detalles
-                const heading = document.createElement('h1');
-                heading.textContent = data.data.name;
+                if (!detailsContainer) {
+                    console.error('Container element not found');
+                    return;
+                }
 
-                const id = document.createElement('h2');
-                id.textContent = data.data.bookClubId;
+                // Crear un div para la tarjeta
+                const card = document.createElement('div');
+                card.classList.add('cardDetails');
+
+                // Crear un elemento de imagen
+                const image = document.createElement('img');
+                image.src = data.data.imageLink;  // Asumiendo que cada item tiene una propiedad imageUrl
+                image.alt = data.data.name;      // Alt para la accesibilidad, puedes poner cualquier texto descriptivo
+                image.classList.add('cardDetails-image');  // Añadimos una clase para el estilo
+
+                // Crear elementos HTML para mostrar los datos
+                const name = document.createElement('h3');
+                name.textContent = data.data.name;
 
                 const description = document.createElement('p');
                 description.textContent = data.data.description;
 
                 const tags = document.createElement('p');
-                tags.textContent = "Tags: " + data.data.tags.join(', ');
+                const tagsEm = document.createElement('em');  // Crear un elemento <em> para poner los tags en cursiva
+                tagsEm.textContent = "Tags: " + data.data.tags.join(', ');
+                tags.appendChild(tagsEm);  // Añadir el <em> dentro del <p>
 
-                const meetLink = document.createElement('a');
-                meetLink.href = data.data.meetLink;
-                meetLink.textContent = "Enlace de reunión";
-                meetLink.target = "_blank";
+                // Añadir los elementos a la tarjeta
+                card.appendChild(image);  // Añadir la imagen a la tarjeta
+                card.appendChild(name);
+                card.appendChild(description);
+                card.appendChild(tags);
 
-                localStorage.setItem('miIdAlmacenado', data.data.bookClubId)
-
-                // Agregar los elementos al contenedor
-                detailsContainer.appendChild(heading);
-                detailsContainer.appendChild(description);
-                detailsContainer.appendChild(tags);
-                detailsContainer.appendChild(meetLink);
+                // Añadir la tarjeta al contenedor
+                detailsContainer.appendChild(card);
+            } else {
+                console.error('No valid data found in localStorage');
             }
         });
     </script>

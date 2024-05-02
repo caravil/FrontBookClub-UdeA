@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.production.min.js"></script>
-        <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
-        <script src="/scripts/prueba.js"></script>
-    
-        <!---Estilo tabla -->
-        <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
-    
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-        <!---Logos awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    
-        <!---Fonts Google -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap">
-    
-        <!-- Estilos personalizados -->
-        <link rel="stylesheet" href="/css/styles.css">
-    
-        <title>Página de inicio</title>
-    </head>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.production.min.js"></script>
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+    <script src="/scripts/prueba.js"></script>
+
+    <!---Estilo tabla -->
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!---Logos awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <!---Fonts Google -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <title>reviews</title>
+</head>
 
 <body>
     <!-- Encabezado -->
@@ -45,17 +46,19 @@
         <section>
             <div class="container-buttons">
                 <div class="container mt-5 colum">
-                    <button type="button" class="btn btn-warning btn-lg active" type="button" onclick="redirigir('showBookClubsDetails.html')">Atras</button>
+                    <button type="button" class="btn btn-warning btn-lg active" type="button"
+                        onclick="redirigir('/pages/clubs/showBookClubsDetails.html')">Atras</button>
                 </div>
                 <div class="container mt-5 colum">
-                    <button  type="button" class="btn btn-success btn-lg active" type="button" onclick="redirigir('safeReview.html')">Agregar Reseña</button>
+                    <button type="button" class="btn btn-success btn-lg active" type="button"
+                        onclick="redirigir('safeReview.html')">Agregar Reseña</button>
                 </div>
             </div>
         </section>
     </main>
     <!-- footer -->
-    <div id="footer"></div>  
-  
+    <div id="footer"></div>
+
     <!-- Script para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>showBookClubsDetails</title>
+    <title>showBookReviewDetails</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,13 +17,6 @@
 
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="/css/styles.css">
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.production.min.js"></script>
-    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
-    <script src="/scripts/prueba.js"></script>
-
 </head>
 
 <body>
@@ -33,11 +26,7 @@
     <div id="navbar"></div>
     <!-- Contenido -->
     <main>
-        <section>
-            <br>
-            <br>
-        </section>
-        <section>
+        <section id="section-details">
             <div id="detailsContainer">
                 <!-- Aquí se mostrarán los detalles del club de lectura -->
             </div>
@@ -45,50 +34,81 @@
         <section>
             <div class="container-buttons">
                 <div class="container mt-5 colum">
-                    <button type="button" class="btn  btn-success btn-lg active" type="button">Comentar</button>
+                    <button type="button" class="btn btn-primary" type="button"
+                        onclick="redirigir('reviews.html')">atras</button>
                 </div>
                 <div class="container mt-5 colum">
-                    <button type="button" class="btn btn-warning btn-lg active" type="button" onclick="redirigir('showBookClubsDetails.html')">Atras</button>
+                    <button type="button" class="btn btn-warning" type="button"
+                        onclick="redirigir('updateReview.html')">Actualizar Reseña</button>
                 </div>
                 <div class="container mt-5 colum">
-                    <button type="button" class="btn  btn-success btn-lg active" type="button">Agregar nueva discusión</button>
+                    <button type="button" class="btn btn-danger" type="button"
+                        onclick="redirigir('safeReview.html')">Eliminar Reseña</button>
                 </div>
-
             </div>
         </section>
     </main>
     <!-- footer -->
     <div id="footer"></div>
 
-    <!-- Script para Obtener los datos de localStorage -->
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.production.min.js"></script>
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+    <script src="/scripts/prueba.js"></script>
+
+    <!-- Script para obtener los datos de localStorage y mostrarlos en tarjetas -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Obtener los datos de las discusiones del club de lectura de localStorage
-            const serializedData = localStorage.getItem('bookClubDiscussions');
+            // Obtener los datos de las reseñas del club de lectura de localStorage
+            const serializedData = localStorage.getItem('bookReviewData');
+            if (!serializedData) {
+                console.error('No data found in localStorage');
+                return;
+            }
             const data = JSON.parse(serializedData);
-            // Verificar si hay datos
-            if (data) {
-                // Obtener el contenedor donde se mostrarán los detalles de las discusiones
+            console.log(data)
+
+            if (data && typeof data.data === 'object' && !Array.isArray(data.data)) {
+
+                // Obtener el contenedor donde se mostrarán las tarjetas
                 const detailsContainer = document.getElementById('detailsContainer');
-                console.log(data)
-                // Suponiendo que data.data pueda ser un array de discusiones, iteramos sobre cada discusión
+                if (!detailsContainer) {
+                    console.error('Container element not found');
+                    return;
+                }
+                // Limpiar el contenedor en caso de que ya tenga contenido
+                detailsContainer.innerHTML = '';
+                // Crear un div para la tarjeta
+                const card = document.createElement('div');
+                card.classList.add('cardDetails');
 
-                const heading = document.createElement('h1');
-                heading.textContent = data.data.title;
+                // Crear elementos HTML para mostrar los datos
+                const bookTitle = document.createElement('h3');
+                bookTitle.textContent = data.data.bookTitle;
 
-                const description = document.createElement('p');
-                description.textContent = data.data.description;
+                const review = document.createElement('p');
+                review.textContent = data.data.review;
+
+                const rating = document.createElement('p');
+                rating.textContent = "Puntaje: " + data.data.rating;
+
 
                 const createdAt = document.createElement('p');
-                createdAt.textContent = `Creada el: ${data.data.createdAt}`;
+                const createdAtEm = document.createElement('em');  // Crear un elemento <em> para poner los tags en cursiva
+                createdAtEm.textContent = "Fecha: " + data.data.createdAt;
+                createdAt.appendChild(createdAtEm);  // Añadir el <em> dentro del <p>
 
-                // Agregar los elementos creados al contenedor de detalles
-                detailsContainer.appendChild(heading);
-                detailsContainer.appendChild(description);
-                detailsContainer.appendChild(createdAt);
+                // Añadir los elementos a la tarjeta
+                card.appendChild(bookTitle);
+                card.appendChild(review);
+                card.appendChild(rating);
+                card.appendChild(createdAtEm);
 
+                // Añadir la tarjeta al contenedor
+                detailsContainer.appendChild(card);
             } else {
-                console.log('No hay discusiones disponibles para mostrar.');
+                console.error('No valid data found in localStorage');
             }
         });
     </script>
