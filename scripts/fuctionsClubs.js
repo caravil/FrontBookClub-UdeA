@@ -1,5 +1,6 @@
 ////////////////////////////////////////////////// BOOK CLUB FUNCTIONS ///////////////////////////////////////////////////////////
-
+fetchBookClubDataAndRenderTable();
+fetchBookClubJoinedDataAndRenderTable()
 // Cargar los datos de los clubes de lectura desde la API y renderizar la tabla
 function fetchBookClubDataAndRenderTable() {
     const url = 'http://localhost:8080/api/v1/book-club/';
@@ -31,6 +32,22 @@ function fetchBookClubDataAndRenderTable() {
                     table: {
                         'white-space': 'nowrap'
                     }
+                },
+                language: {
+                    'search': {
+                        'placeholder': '🔍 Buscar...'
+                    },
+                    'pagination': {
+                        'previous': 'Anterior',
+                        'next': 'Siguiente',
+                        'showing': 'Mostrando',
+                        'of': 'de',
+                        'to': 'a',
+                        'results': 'resultados'
+                    },
+                    loading: 'Cargando...',
+                    noRecordsFound: 'Sin coincidencias encontradas',
+                    error: 'Ocurrió un error al cargar la información',
                 }
             });
 
@@ -74,6 +91,22 @@ function fetchBookClubJoinedDataAndRenderTable() {
                     table: {
                         'white-space': 'nowrap'
                     }
+                },
+                language: {
+                    'search': {
+                        'placeholder': '🔍 Buscar...'
+                    },
+                    'pagination': {
+                        'previous': 'Anterior',
+                        'next': 'Siguiente',
+                        'showing': 'Mostrando',
+                        'of': 'de',
+                        'to': 'a',
+                        'results': 'resultados'
+                    },
+                    loading: 'Cargando...',
+                    noRecordsFound: 'Sin coincidencias encontradas',
+                    error: 'Ocurrió un error al cargar la información',
                 }
             });
 

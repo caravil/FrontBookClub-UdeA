@@ -1,4 +1,5 @@
-//////////////////////////////////////////////////////////////////// RESEÑAS FUNCTIONS ///////////////////////////////////////////////////////////
+////////////////////////////////////////////////// RESEÑAS FUNCTIONS ///////////////////////////////////////////////////////////
+fetchBookReviewDataAndRenderTable()
 
 // Función para cargar y renderizar la tabla de reseñas
 function fetchBookReviewDataAndRenderTable() {
@@ -16,7 +17,7 @@ function fetchBookReviewDataAndRenderTable() {
             const filteredData = data.data.filter(item => item.bookClubId == clubId);
             // Crear la tabla con Grid.js utilizando los datos filtrados
             const table = new gridjs.Grid({
-                columns: ['Titulo del libro', 'Puntacion', 'Fecha de creación', 'Detalles'],
+                columns: ['Título del libro', 'Puntuación', 'Fecha de creación', 'Detalles'],
                 data: filteredData.map(item => [
                     item.bookTitle,
                     item.rating,
@@ -34,9 +35,24 @@ function fetchBookReviewDataAndRenderTable() {
                     table: {
                         'white-space': 'nowrap'
                     }
+                },
+                language: {
+                    'search': {
+                        'placeholder': '🔍 Buscar...'
+                    },
+                    'pagination': {
+                        'previous': 'Anterior',
+                        'next': 'Siguiente',
+                        'showing': 'Mostrando',
+                        'of': 'de',
+                        'to': 'a',
+                        'results': 'resultados'
+                    },
+                    loading: 'Cargando...',
+                    noRecordsFound: 'Sin coincidencias encontradas',
+                    error: 'Ocurrió un error al cargar la información',
                 }
             });
-
             // Renderizar la tabla en el elemento con id "my-table-reviews"
             table.render(document.getElementById('my-table-reviews'));
         })
@@ -44,7 +60,6 @@ function fetchBookReviewDataAndRenderTable() {
             console.error("Error fetching data: ", error);
         });
 }
-fetchBookReviewDataAndRenderTable()
 
 // Función para obtener los datos de una reseña por ID
 async function fetchReviewByID(id) {
@@ -84,11 +99,9 @@ async function cargarDetallesClubReseñas(bookReviewId) {
     try {
         // Obtener los detalles del club de lectura usando fetchBookClubByID
         const data = await fetchReviewByID(bookReviewId);
-
         // Almacenar los datos en localStorage
         localStorage.setItem('bookReviewData', JSON.stringify(data));
         localStorage.setItem('bookReviewId', data.data.bookReviewId);
-
         // Redirigir a la página HTML deseada
         window.location.href = 'showBookReviewDetails.html';
     } catch (error) {
@@ -190,9 +203,10 @@ async function actualizarReseña(bookReviewId, bookTitle, review, rating, create
         }
         const responseData = await response.json();
         alert("Su reseña ha sido actualizada");
-        window.location.assign('reviews/showBookReviewDetails.html');
+        window.location.assign('reviews/reviews.html');
         return responseData; // Devuelve los datos de la reseña actualizada
     } catch (error) {
+        alert("Error al actualizar la reseña");
         console.error("Error al actualizar la reseña:", error);
         throw error; // Re-lanzar el error para que se maneje fuera de esta función si es necesario
     }
@@ -210,10 +224,12 @@ async function eliminarReseña(bookReviewId) {
         if (!response.ok) {
             throw new Error(`Error al eliminar la reseña. Estado HTTP: ${response.status}`);
         }
-
+        alert("Su reseña ha sido eliminada exitosamente");
         const responseData = await response.json();
+        window.location.assign('reviews.html');
         return responseData; // Devuelve los datos de la reseña eliminada
     } catch (error) {
+        alert("Error al eliminar la reseña");
         console.error("Error al eliminar la reseña:", error);
         throw error; // Re-lanzar el error para que se maneje fuera de esta función si es necesario
     }

@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>showBookClubsDetails</title>
 
+    <!---Estilo tabla -->
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -17,13 +20,6 @@
 
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="/css/styles.css">
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.production.min.js"></script>
-    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
-    <script src="/scripts/prueba.js"></script>
-
 </head>
 
 <body>
@@ -34,24 +30,22 @@
     <!-- Contenido -->
     <main>
         <section>
-            <br>
-            <br>
-        </section>
-        <section>
-            <div id="detailsContainer">
-                <!-- Aquí se mostrarán los detalles del club de lectura -->
+            <div id="my-table">
             </div>
         </section>
         <section>
             <div class="container-buttons">
                 <div class="container">
+                    <button type="button" class="btn btn-warning btn-lg active" type="button"
+                        onclick="redirigir('/pages/clubs/showBookClubsDetails.html')">Atrás</button>
+                </div>
+                <div class="container">
                     <button type="button" class="btn  btn-success btn-lg active" type="button">Comentar</button>
                 </div>
+
                 <div class="container">
-                    <button type="button" class="btn btn-warning btn-lg active" type="button" onclick="redirigir('/pages/clubs/showBookClubsDetails.html')">Atrás</button>
-                </div>
-                <div class="container">
-                    <button type="button" class="btn  btn-success btn-lg active" type="button" onclick="redirigir('/pages/discussions/createDiscussion.html')">Agregar nueva discusión</button>
+                    <button type="button" class="btn  btn-success btn-lg active" type="button"
+                        onclick="redirigir('/pages/discussions/createDiscussion.html')">Agregar nueva discusión</button>
                 </div>
 
             </div>
@@ -59,43 +53,9 @@
     </main>
     <!-- footer -->
     <div id="footer"></div>
-
-    <!-- Script para Obtener los datos de localStorage -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Obtener los datos de las discusiones del club de lectura de localStorage
-            const serializedData = localStorage.getItem('bookClubDiscussions');
-            const data = JSON.parse(serializedData);
-            // Verificar si hay datos
-            if (data) {
-                // Obtener el contenedor donde se mostrarán los detalles de las discusiones
-                const detailsContainer = document.getElementById('detailsContainer');
-                console.log(data)
-                // Suponiendo que data.data pueda ser un array de discusiones, iteramos sobre cada discusión
-
-                const heading = document.createElement('h1');
-                heading.textContent = data.data.title;
-
-                const description = document.createElement('p');
-                description.textContent = data.data.description;
-
-                const createdAt = document.createElement('p');
-                createdAt.textContent = `Creada el: ${data.data.createdAt}`;
-
-                // Agregar los elementos creados al contenedor de detalles
-                detailsContainer.appendChild(heading);
-                detailsContainer.appendChild(description);
-                detailsContainer.appendChild(createdAt);
-
-            } else {
-                console.log('No hay discusiones disponibles para mostrar.');
-            }
-        });
-    </script>
-
     <!-- Script para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación -->
     <script>
-        document.addEventListener("DOMContentLoaded", function (){
+        document.addEventListener("DOMContentLoaded", function () {
             // Función para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación
             function loadAndCacheContent(url, targetId) {
                 fetch(url)
@@ -125,8 +85,12 @@
             loadAndCacheContent('/components/navbar.html', 'navbar');
         });
     </script>
-
-
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.production.min.js"></script>
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+    <script src="/scripts/fuctionsDiscussions.js"></script>
+    <script src="/scripts/fuctionGlobals.js"></script>
 </body>
 
 </html>
