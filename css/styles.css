@@ -186,6 +186,10 @@ td {
     justify-content: center;
 }
 
+#detailsComments{
+    background: #fff;
+}
+
 .container-buttons {
     display: flex;
     align-items: center;
@@ -270,13 +274,11 @@ td {
 }
 
 .card h3 {
-    margin: 20px;
     text-align: center;
     padding: 20px;
 }
 
 .card p {
-    margin: 20px;
     color: #555;
     padding: 20px;
 }

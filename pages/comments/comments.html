@@ -1,10 +1,160 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>showBookClubsDetails</title>
+
+    <!---Estilo tabla -->
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!---Logos awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <!---Fonts Google -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
+
 <body>
-    <h1> DEUDA TECNICA </h1>
+    <!-- Encabezado -->
+    <div id="header"></div>
+
+    <!-- Barra de navegación -->
+    <div id="navbar"></div>
+
+    <!-- Contenido -->
+    <main>
+        <section id="section-details">
+            <div id="detailsContainer">
+                <!-- Aquí se mostrarán los detalles de la discusión -->
+            </div>
+        </section>
+        <section>
+            <form class=" form-base row g-4" id="profileForm">
+                <div class="form-group">
+                    <textarea class="form-control" rows="5"></textarea>
+                </div>
+                <div class="div-form">
+                    <button type="submit" class="btn btn-success">Enviar comentario</button>
+                    <button type="button" class="btn btn-danger"
+                        onclick="redirigir('/pages/discussions/discussions.html')">Cancelar</button>
+                </div>
+            </form>
+        </section>
+        <section>
+            <div id="my-container">
+                <div class="cardDetails">
+                    <!-- Aquí se mostrarán los detalles de los comentarios sobre la discusión -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- footer -->
+    <div id="footer"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.production.min.js"></script>
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+    <script src="/scripts/fuctionGlobals.js"></script>
+    <script src="/scripts/fuctionsDiscussions.js"></script>
+    <script src="/scripts/fuctionsComments.js"></script>
+
+    <!-- Script para obtener los datos de localStorage y mostrarlos en tarjetas -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Obtener los datos de localStorage
+            const serializedData = localStorage.getItem('discussionData');
+            if (!serializedData) {
+                console.error('No data found in localStorage');
+                return;
+            }
+
+            const data = JSON.parse(serializedData);
+            // Verificar si hay datos y si es un objeto
+            if (data && typeof data.data === 'object' && !Array.isArray(data.data)) {
+                // Obtener el contenedor donde se mostrarán las tarjetas
+                const detailsContainer = document.getElementById('detailsContainer');
+                if (!detailsContainer) {
+                    console.error('Container element not found');
+                    return;
+                }
+
+                // Crear un div para la tarjeta
+                const card = document.createElement('div');
+                card.classList.add('cardDetails');
+
+                // Crear elementos HTML para mostrar los datos
+                const title = document.createElement('h3');
+                title.textContent = data.data.title;
+
+                const description = document.createElement('p');
+                description.textContent = data.data.description;
+
+                const createdAt = document.createElement('p');
+                const createdAtEm = document.createElement('em');  // Crear un elemento <em> para poner los tags en cursiva
+                createdAtEm.textContent = "Fecha de creación: " + data.data.createdAt;
+                createdAt.appendChild(createdAtEm);  // Añadir el <em> dentro del <p>
+
+                // Añadir los elementos a la tarjeta
+                card.appendChild(title);
+                card.appendChild(description);
+                card.appendChild(createdAt);
+
+                // Añadir la tarjeta al contenedor
+                detailsContainer.appendChild(card);
+            } else {
+                console.error('No valid data found in localStorage');
+            }
+        });
+    </script>
+
+    <!-- Script para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Función para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación
+            function loadAndCacheContent(url, targetId) {
+                fetch(url)
+                    .then(response => response.text())
+                    .then(data => {
+                        localStorage.setItem(targetId, data);
+                        // Insertar el contenido en el elemento con el ID especificado
+                        document.getElementById(targetId).innerHTML = data;
+                        // Delegar eventos de clic a los enlaces dentro del elemento
+                        document.getElementById(targetId).addEventListener("click", function (event) {
+                            if (event.target.tagName === "A") {
+                                window.location.href = event.target.href;
+                            }
+                        });
+                        ocultarItemNavSegunRol()
+                    })
+                    .catch(error => console.error(`Error al cargar ${targetId}:`, error));
+            }
+
+            // Cargar y almacenar en caché el contenido del header
+            loadAndCacheContent('/components/header.html', 'header');
+
+            // Cargar y almacenar en caché el contenido del footer
+            loadAndCacheContent('/components/footer.html', 'footer');
+
+            // Cargar y almacenar en caché el contenido del menú de navegación
+            loadAndCacheContent('/components/navbar.html', 'navbar');
+        });
+    </script>
+
+    <script>
+        getCommentById()
+    </script>
+
 </body>
+
 </html>

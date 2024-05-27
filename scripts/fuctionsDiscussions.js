@@ -1,8 +1,5 @@
 //////////////////////////////////////////////// FUNCIONES DISCUSIONES ///////////////////////////////////////////////////
 
-// Cargar y mostrar las discusiones al cargar la página
-fetchDiscussionDataAndRenderTable()
-
 // Función para cargar las discusiones y renderizar en una tabla
 function fetchDiscussionDataAndRenderTable() {
     const url = 'http://localhost:8080/api/v1/discussion/';
@@ -173,7 +170,7 @@ async function DeleteDiscussion() {
             throw error; // Re-lanzar el error para que se maneje fuera de esta función si es necesario
         }
     }
-    else alert("No tiene permisos para eliminar esta reseña");
+    else alert("No tiene permisos para eliminar esta discusión");
     window.location.assign('/pages/discussions/discussions.html');
 }
 
