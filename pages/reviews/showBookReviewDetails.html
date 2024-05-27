@@ -33,22 +33,23 @@
         </section>
         <section>
             <div class="container-buttons">
-                <div class="container mt-5 colum">
-                    <button type="button" class="btn btn-primary" type="button"
-                        onclick="redirigir('reviews.html')">atras</button>
+                <div class="container ">
+                    <button type="button" class="btn btn-success btn-lg active" type="button"
+                        onclick="redirigir('reviews.html')">Atrás</button>
                 </div>
-                <div class="container mt-5 colum">
-                    <button type="button" class="btn btn-warning" type="button"
+                <div class="container">
+                    <button type="button" class="btn btn-warning btn-lg active" type="button"
                         onclick="redirigir('updateReview.html')">Actualizar Reseña</button>
                 </div>
-                <div class="container mt-5 colum">
-                    <button type="button" class="btn btn-danger" type="button"
-                        onclick="redirigir('safeReview.html')">Eliminar Reseña</button>
+                <div class="container">
+                    <button type="button" class="btn btn-danger btn-lg active" type="button"
+                        onclick="eliminarReseña(localStorage.getItem('bookReviewId'))">Eliminar Reseña</button>
                 </div>
             </div>
         </section>
     </main>
     <!-- footer -->
+    
     <div id="footer"></div>
 
     <!-- Scripts -->
@@ -82,6 +83,8 @@
                 // Crear un div para la tarjeta
                 const card = document.createElement('div');
                 card.classList.add('cardDetails');
+
+                localStorage.setItem('dueñoReview', data.data.userId);
 
                 // Crear elementos HTML para mostrar los datos
                 const bookTitle = document.createElement('h3');
@@ -130,6 +133,7 @@
                                 window.location.href = event.target.href;
                             }
                         });
+                        ocultarItemNavSegunRol()
                     })
                     .catch(error => console.error(`Error al cargar ${targetId}:`, error));
             }

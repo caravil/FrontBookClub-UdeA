@@ -1,3 +1,4 @@
+// Función para crear las tarjetas
 function fetchBookClubDataAndRenderCards() {
     const url = 'http://localhost:8080/api/v1/book-club/';
 

@@ -35,25 +35,30 @@
         <section>
             <div class="container-buttons">
                 <div  class="container colum">
-                    <button type="button" class="btn btn-success btn-lg active" type="button" onclick="redirigir('/pages/reviews/reviews.html')">Reseñas</button>
+                    <button type="button" class="btn btn-success btn-lg active"  onclick="redirigir('/pages/reviews/reviews.html')">Reseñas</button>
                 </div>
                 <div class="container colum">
-                    <button  type="button" class="btn btn-success btn-lg active" type="button" onclick="redirigir('/pages/discussions/discussions.html')">Discuciones</button>
+                    <button  type="button" class="btn btn-success btn-lg active"  onclick="redirigir('/pages/discussions/discussions.html')">Discusiones</button>
                 </div>
                 <div class="container colum">
-                    <button  type="button" class="btn btn-success btn-lg active" type="button" onclick="unirseClub()">Unirme</button>
+                    <button  type="button" class="btn btn-success btn-lg active" onclick="unirseClub()">Unirme</button>
                 </div>
                 <div class="container  colum">
-                    <button type="button" class="btn btn-success btn-lg active" type="button" onclick="redirigir('/pages/clubs/clubs.html')">Listado Clubes</button>
+                    <button type="button" class="btn btn-success btn-lg active"  onclick="redirigir('/pages/clubs/clubs.html')">Listado Clubes</button>
                 </div>
+            </div>
+            <div class="container-admin" style="display: none;">
                 <div class="container  colum">
-                    <button type="button" class="btn btn-success btn-lg active" type="button" onclick="validarYRedirigir('/pages/clubs/createEvent.html')">Crear Reunion</button>
+                    <button type="button" class=" adminButton btn btn-success btn-lg active"  style="display: none;" onclick="validarYRedirigir('/pages/clubs/createEvent.html')">Crear Reunion</button>
+                </div>´
+                <div class="container  colum">
+                    <button type="button" class=" adminButton btn btn-success btn-lg active"  style="display: none;" onclick="actualizaAsistentes()">Actualizar Asistentes</button>
                 </div>
                 <div class="container colum">
-                    <button type="button" class="btn btn-warning btn-lg active" type="button" onclick="validarYRedirigir('/pages/clubs/updateClub.html')">Actualizar Club</button>
+                    <button type="button" class="adminButton btn btn-warning btn-lg active"  style="display: none;" onclick="validarYRedirigir('/pages/clubs/updateClub.html')">Actualizar Club</button>
                 </div>
                 <div class="container  colum">
-                    <button type="button" class="btn btn-danger btn-lg active" type="button" onclick="deleteClub()">Eliminar Club</button>
+                    <button type="button" class="adminButton btn btn-danger btn-lg active"  style="display: none;" onclick="deleteClub()">Eliminar Club</button>
                 </div>
             </div>
         </section>
@@ -126,7 +131,7 @@
 
     <!-- Script para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function (){
             // Función para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación
             function loadAndCacheContent(url, targetId) {
                 fetch(url)
@@ -141,6 +146,7 @@
                                 window.location.href = event.target.href;
                             }
                         });
+                        ocultarItemNavSegunRol()
                     })
                     .catch(error => console.error(`Error al cargar ${targetId}:`, error));
             }

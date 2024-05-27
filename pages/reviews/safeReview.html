@@ -25,28 +25,33 @@
     <!-- Barra de navegación -->
     <div id="navbar"></div>
     <main>
-        <div class="container mt-5">
-            <h1 class="mb-4">Formulario de Ingreso de Reseñas</h1>
-            <form id="reviewForm">
-                <div class="mb-3">
+        <div class="container" id="container-form">
+            <form class=" form-base row g-4" id="reviewForm">
+                <div class="div-form">
+                    <h2 class="mb-4">Formulario de Ingreso de Reseñas</h2>
+                </div>
+                <div class="div-form">
                     <label for="bookTitle" class="form-label">Título del Libro:</label>
                     <input type="text" class="form-control" id="bookTitle" name="bookTitle" required>
                 </div>
-                <div class="mb-3">
+                <div class="div-form">
                     <label for="review" class="form-label">Reseña:</label>
                     <textarea class="form-control" id="review" name="review" required></textarea>
                 </div>
-                <div class="mb-3">
+                <div class="div-form">
                     <label for="rating" class="form-label">Rating:</label>
                     <input type="number" class="form-control" id="rating" name="rating" min="0" max="5" step="0.1"
                         required>
                 </div>
-                <div class="mb-3">
-                    <label for="createdAt" class="form-label">Fecha de Creación:</label>
-                    <input type="date" class="form-control" id="createdAt" name="createdAt"  readonly>
+                <div class="div-form">
+                    <label for="createdAt" class="form-label" style="display: none;">Fecha de Creación:</label>
+                    <input type="date" class="form-control" id="createdAt" name="createdAt"  style="display: none;" readonly>
                 </div>
-                <button type="submit" class="btn btn-success" onclick="redirigir('reviews.html')">Guardar</button>
-                <button type="button" class="btn btn-secondary ms-2" onclick="redirigir('reviews.html')">Cancelar</button>
+                <div class="div-form">
+                    <button type="submit" class="btn btn-success" onclick="redirigir('reviews.html')">Guardar</button>
+                    <button type="button" class="btn btn-danger" onclick="redirigir('reviews.html')">Cancelar</button>
+                </div>
+
             </form>
         </div>
     </main>
@@ -90,7 +95,7 @@
 
     <!-- Script para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function (){
             // Función para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación
             function loadAndCacheContent(url, targetId) {
                 fetch(url)
@@ -105,6 +110,7 @@
                                 window.location.href = event.target.href;
                             }
                         });
+                        ocultarItemNavSegunRol()
                     })
                     .catch(error => console.error(`Error al cargar ${targetId}:`, error));
             }

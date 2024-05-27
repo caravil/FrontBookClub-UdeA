@@ -34,32 +34,30 @@
 
     <!-- Contenido -->
     <main>
-        <div>
-            <h1 class="text-center">Mi perfil</h1>
-        </div>
-        <div class="container mt-3">
-            <form class="row g-4" id="profileForm">
-                <div class="row-md-4">
+        <div class="container" id="container-form">
+            <form class=" form-base row g-4" id="profileForm">
+                <div>
+                    <h2>Mi perfil</h2>
+                </div>
+                <div class="div-form">
                     <label for="inputName" class="form-label">Nombre</label>
                     <input type="text" class="form-control" id="inputName" placeholder="Nombre Usuario">
                 </div>
-                <div class="row-md-4">
+                <div class="div-form">
                     <label for="inputImage" class="form-label">Imagen</label>
                     <input type="text" class="form-control" id="inputImage" placeholder="Imagen">
                 </div>
-                <div class="row-md-4">
+                <div class="div-form">
                     <label for="inputEmail" class="form-label">Correo</label>
                     <input type="email" class="form-control" id="inputEmail" placeholder="Correo Electronico">
                 </div>
-                <div class="row-md-4">
+                <div class="div-form">
                     <label for="inputPassword" class="form-label">Contraseña</label>
                     <input type="text" class="form-control" id="inputPassword" placeholder="Contraseña">
                 </div>
-                <div class="row-12">
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
-                </div>
-                <div class="row-12">
-                    <button type="button" class="btn btn-primary">Cancelar</button>
+                <div class="div-form">
+                    <button type="submit" class="btn btn-success">Actualizar</button>
+                    <button type="button" class="btn btn-danger">Cancelar</button>
                 </div>
             </form>
         </div>
@@ -93,7 +91,7 @@
 
     <!-- Script para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function (){
             // Función para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación
             function loadAndCacheContent(url, targetId) {
                 fetch(url)
@@ -108,6 +106,7 @@
                                 window.location.href = event.target.href;
                             }
                         });
+                        ocultarItemNavSegunRol()
                     })
                     .catch(error => console.error(`Error al cargar ${targetId}:`, error));
             }

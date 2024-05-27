@@ -29,28 +29,34 @@
     <div id="navbar"></div>
     <!-- Contenido -->
     <main>
-        <div class="container mt-5">
-            <h2>Formulario de Registro Evento</h2>
-            <form id="meetForm">
-                <div class="mb-3">
+        <div class="container" id="container-form">
+            <form class=" form-base row g-4" id="meetForm">
+                <div>
+                    <h2>Formulario de Registro Evento</h2>
+                </div>
+                <div class="div-form">
                     <label for="summary" class="form-label">Título</label>
                     <input type="text" class="form-control" id="summary" name="summary" placeholder="Ingresa un título">
                 </div>
-                <div class="mb-3">
+                <div class="div-form">
                     <label for="descripcion" class="form-label">Descripción</label>
                     <textarea class="form-control" id="descripcion" name="descripcion" rows="3"
                         placeholder="Descripción del evento"></textarea>
                 </div>
-                <div class="mb-3">
+                <div class="div-form">
                     <label for="hora" class="form-label">Fecha y Hora Inicio</label>
                     <input type="datetime-local" class="form-control" id="fechaHoraInicio" name="fechaHoraInicio">
                 </div>
-                <div class="mb-3">
-                    <label for="hora" class="form-label">Fecha y Hora Finalizacion </label>
+                <div class="div-form">
+                    <label for="hora" class="form-label">Fecha y Hora Finalización </label>
                     <input type="datetime-local" class="form-control" id="fechaHoraFinal" name="fechaHoraFinal">
                 </div>
-                <button type="submit" class="btn btn-success">Enviar</button>
-                <button type="button" class="btn btn-secondary" onclick="redirigir('showBookClubsDetails.html')">Cancelar</button>
+                <div class="div-form">
+                    <button type="submit" class="btn btn-success">Enviar</button>
+                    <button type="button" class="btn btn-danger"
+                        onclick="redirigir('showBookClubsDetails.html')">Cancelar</button>
+                </div>
+
             </form>
         </div>
     </main>
@@ -67,15 +73,15 @@
             reviewForm.addEventListener('submit', async (event) => {
                 event.preventDefault(); // Evitar el envío del formulario por defecto
 
-                const summary= document.getElementById('summary').value;
+                const summary = document.getElementById('summary').value;
                 const descripcion = document.getElementById('descripcion').value;
-                const fechaHoraInicio = document.getElementById('fechaHoraInicio').value+":00-05:00";
-                const fechaHoraFinal = document.getElementById('fechaHoraFinal').value+":00-05:00";
+                const fechaHoraInicio = document.getElementById('fechaHoraInicio').value + ":00-05:00";
+                const fechaHoraFinal = document.getElementById('fechaHoraFinal').value + ":00-05:00";
 
                 try {
                     const bookClubId = localStorage.getItem('bookClubId');
                     console.log(bookClubId)
-                    const responseData = await crearReunionMeet( bookClubId, summary, descripcion, fechaHoraInicio, fechaHoraFinal);
+                    const responseData = await crearReunionMeet(bookClubId, summary, descripcion, fechaHoraInicio, fechaHoraFinal);
                     console.log('Reunion creada', responseData);
                     // Redirigir a otra página si lo deseas
                     window.location.href = 'showBookReviewDetails.html';
@@ -104,6 +110,7 @@
                                 window.location.href = event.target.href;
                             }
                         });
+                        ocultarItemNavSegunRol()
                     })
                     .catch(error => console.error(`Error al cargar ${targetId}:`, error));
             }

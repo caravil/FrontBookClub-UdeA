@@ -48,9 +48,9 @@
     <script src="/scripts/prueba.js"></script>
     <script src="/scripts/script.js"></script>
 
-
+    <!-- Script para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function (){
             // Función para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación
             function loadAndCacheContent(url, targetId) {
                 fetch(url)
@@ -65,6 +65,7 @@
                                 window.location.href = event.target.href;
                             }
                         });
+                        ocultarItemNavSegunRol()
                     })
                     .catch(error => console.error(`Error al cargar ${targetId}:`, error));
             }

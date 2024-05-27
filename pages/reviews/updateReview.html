@@ -25,40 +25,43 @@
     <!-- Barra de navegación -->
     <div id="navbar"></div>
     <main>
-        <div class="container mt-2">
-            <h1 class="mb-4">Actualizacion de Reseña</h1>
-            <form id="bookReviewForm">
-                <div class="mb-3">
-                    <label for="bookReviewId">Book Review ID:</label>
-                    <input type="text" class="form-control" id="bookReviewId" name="bookReviewId" readonly><br><br>
+        <div class="container" id="container-form">
+            <form class=" form-base row g-4" id="bookReviewForm">
+                <div class="div-form">
+                    <h1>Actualización de Reseña</h1>
                 </div>
-
-                <div class="mb-2">
-                    <label for="bookTitle" class="form-label">Book Title:</label>
-                    <input type="text" class="form-control" id="bookTitle" name="bookTitle"><br><br>
+                <div class="div-form">
+                    <label for="bookTitle" class="form-label">Título libro</label>
+                    <input type="text" class="form-control" id="bookTitle" name="bookTitle">
                 </div>
-                <div class="mb-2">
-                    <label for="review" class="form-label">Review:</label>
-                    <input type="text" class="form-control" id="review" name="review"><br><br>
+                <div class="div-form">
+                    <label for="review" class="form-label">Reseña</label>
+                    <input type="text" class="form-control" id="review" name="review">
                 </div>
-                <div class="mb-2">
+                <div class="div-form">
                     <label for="rating" class="form-label">Rating:</label>
-                    <input type="text" class="form-control" id="rating" name="rating"><br><br>
+                    <input type="text" class="form-control" id="rating" name="rating">
                 </div>
-                <div class="mb-2">
+                <div class="div-form"  style="display: none;">
+                    <label for="bookReviewId">Book Review ID:</label>
+                    <input type="text" class="form-control" id="bookReviewId" name="bookReviewId" readonly>
+                </div>
+                <div class="div-form"  style="display: none;">
                     <label for="createdAt" class="form-label">Created At:</label>
-                    <input type="text" class="form-control" id="createdAt" name="createdAt" readonly><br><br>
+                    <input type="text" class="form-control" id="createdAt" name="createdAt" readonly>
                 </div>
-                <div class="mb-2">
+                <div class="div-form"  style="display: none;">
                     <label for="userId" class="form-label">User ID:</label>
-                    <input type="text" class="form-control" id="userId" name="userId" readonly><br><br>
+                    <input type="text" class="form-control" id="userId" name="userId" readonly>
                 </div>
-                <div class="mb-2">
+                <div class="div-form"  style="display: none;">
                     <label for="bookClubId" class="form-label">Book Club ID:</label>
-                    <input type="text" class="form-control" id="bookClubId" name="bookClubId" readonly><br><br>
+                    <input type="text" class="form-control" id="bookClubId" name="bookClubId" readonly>
                 </div>
-                <button type="submit" class="btn btn-success">Guardar</button>
-                <button type="button" class="btn btn-secondary" onclick="redirigir('showBookReviewDetails.html')">Cancelar</button>
+                <div class="div-form">
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <button type="button" class="btn btn-danger" onclick="redirigir('showBookReviewDetails.html')">Cancelar</button>
+                </div>
             </form>
         </div>
     </main>
@@ -80,7 +83,7 @@
         document.getElementById('createdAt').value = today;
     </script>
 
-    <!--Envio del formulario-->
+    <!--Envió del formulario-->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const reviewForm = document.getElementById('bookReviewForm');
@@ -100,7 +103,7 @@
                     const responseData = await actualizarReseña( bookReviewId, bookTitle, review, rating, createdAt, userId, bookClubId);
                     console.log('Reseña creada:', responseData);
                     // Redirigir a otra página si lo deseas
-                    window.location.href = '/pages/review/showBookReviewDetails.html';
+                    window.location.href = 'showBookReviewDetails.html';
                 } catch (error) {
                     // Manejar el error, por ejemplo, mostrar un mensaje de error al usuario
                     console.error('Error al crear la reseña:', error);
@@ -111,7 +114,7 @@
 
     <!-- Script para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function (){
             // Función para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación
             function loadAndCacheContent(url, targetId) {
                 fetch(url)
@@ -126,6 +129,7 @@
                                 window.location.href = event.target.href;
                             }
                         });
+                        ocultarItemNavSegunRol()
                     })
                     .catch(error => console.error(`Error al cargar ${targetId}:`, error));
             }

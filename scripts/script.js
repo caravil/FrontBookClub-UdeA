@@ -88,3 +88,6 @@ function redirigir(destino) {
   // Cambiar la ubicación de la página
   window.location.href = 'login.html';
 }
+
+
+

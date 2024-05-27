@@ -37,28 +37,29 @@
 
     <!-- Contenido -->
     <main>
-        <div class="container mt-5">
-            <form class="row g-4">
-                <div class="row-md-4">
+        <div class="container" id="container-form">
+            <form class="form-base row g-4">
+                <div class="div-form">
+                    <h2 class="mb-4">Formulario de Actualización de Club</h2>
+                </div>
+                <div class="div-form">
                     <label for="inputName" class="form-label">Nombre club</label>
                     <input type="text" class="form-control" id="inputName" placeholder="Nombre club">
                 </div>
-                <div class="row-md-4">
-                    <label for="inputDescription" class="form-label">Descripcion</label>
-                    <input type="text" class="form-control" id="inputDescription" placeholder="Descripcion">
+                <div class="div-form">
+                    <label for="inputDescription" class="form-label">Descripción</label>
+                    <input type="text" class="form-control" id="inputDescription" placeholder="Descripción">
                 </div>
-                <div class="row-md-4">
+                <div class="div-form">
                     <label for="inputTags" class="form-label">Tags</label>
                     <input type="text" class="form-control" id="inputTags" placeholder="Tags">
                 </div>
-                <div class="row-md-4">
+                <div class="div-form">
                     <label for="inputLinkImage" class="form-label">Link Imagen</label>
                     <input type="text" class="form-control" id="inputLinkImage" placeholder="Link Imagen">
                 </div>
-                <div class="row-12">
-                    <button type="submit" class="btn btn-primary" onclick= handleFormSubmitUpdateClub()>Actualizar</button>
-                </div>
-                <div class="row-12">
+                <div class="div-form">
+                    <button type="submit" class="btn btn-success" onclick= handleFormSubmitUpdateClub()>Actualizar</button>
                     <button type="button" class="btn btn-danger" onclick= "redirigir('/pages/loggedIn/home.html')">Cancelar</button>
                 </div>
             </form>
@@ -73,7 +74,7 @@
 
     <!-- Script para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function (){
             // Función para cargar y almacenar en caché el contenido del header, el footer y el menú de navegación
             function loadAndCacheContent(url, targetId) {
                 fetch(url)
@@ -88,6 +89,7 @@
                                 window.location.href = event.target.href;
                             }
                         });
+                        ocultarItemNavSegunRol()
                     })
                     .catch(error => console.error(`Error al cargar ${targetId}:`, error));
             }

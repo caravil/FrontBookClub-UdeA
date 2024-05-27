@@ -12,9 +12,9 @@ header img {
 main {
     display: flex;
     flex-direction: column;
-    min-height: 80vh;
+    margin-bottom: 40px;
     /* Asegura que el body ocupe al menos el 100% de la altura de la ventana */
-    margin: 0;
+
     /* Elimina el margen predeterminado del body */
 }
 
@@ -93,7 +93,6 @@ footer img {
 }
 
 section {
-    padding: 8px;
     background-color: #ffff;
 }
 
@@ -136,11 +135,6 @@ section {
     color: white;
 }
 
-.container {
-    display: block;
-    padding: 20px;
-}
-
 table {
     background-color: #f0f0f0;
     border-radius: 12px;
@@ -168,13 +162,20 @@ td {
     padding: 20px;
 }
 
+#nav-admin {
+    text-align: center;
+}
+
 .gridjs-head {
     text-align: end;
 }
 
 #detailsContainer {
-    padding: 40px;
     text-align: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 #my-container {
@@ -187,6 +188,57 @@ td {
 
 .container-buttons {
     display: flex;
+    align-items: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.container-admin {
+    display: flex;
+    align-items: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 1%;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 12px;
+}
+
+#container-form {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+.form-base {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    border: 2px solid #979595;
+    border-radius: 8px;
+    width: 60%;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
+
+.div-form {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* Tarjeta inicio*/
@@ -252,8 +304,10 @@ td {
     margin-right: 8px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: auto; /* Ajusta este valor según sea necesario */
-    height: auto; /* Ajusta este valor según sea necesario */
+    width: auto;
+    /* Ajusta este valor según sea necesario */
+    height: auto;
+    /* Ajusta este valor según sea necesario */
     /* Alinea todos los elementos hijos en el centro horizontalmente */
     cursor: pointer;
     /* Cambia el cursor a una mano para indicar que la tarjeta es clicable */

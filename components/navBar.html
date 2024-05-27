@@ -12,14 +12,28 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/pages/clubs/clubs.html">Clubes</a>
                 </li>
-                <li class="nav-item dropdown">
+                <script>
+                    const role = obtenerRolDelUsuario();
+                    if (role === 'ADMIN') {
+                        navAdmin.forEach(nav => {
+                            nav.style.display = 'flex'; // Muestra los botones de administrador
+                        });
+                    } else {
+                        console.log("estoy ocultando nav items")
+                        navAdmin.forEach(nav => {
+                            nav.style.display = 'none'; // Asegura que estén ocultos
+                        });
+                    }
+                </script>
+                <li class="nav-item dropdown" id="nav-admin" style="display: flex;">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Gestionar Clubes
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li class="nav-item">
-                            <a class="dropdown-item" href=# href="#" onclick="validarYRedirigir('/pages/clubs/createClub.html')">Crear Club</a>
+                            <a class="dropdown-item" href=# href="#"
+                                onclick="validarYRedirigir('/pages/clubs/createClub.html')">Crear Club</a>
                         </li>
                     </ul>
                 </li>
@@ -41,4 +55,3 @@
         </div>
     </div>
 </nav>
-

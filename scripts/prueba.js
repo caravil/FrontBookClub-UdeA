@@ -147,7 +147,7 @@ async function cargarDetallesClub(bookClubId) {
     }
 }
 
-// Funcion para crear una reunion de Meet
+// Función para crear una reunion de Meet
 async function crearReunionMeet(bookClubId, summary, descripcion, fechaHoraInicio, fechaHoraFinal) {
     try {
         const url = `http://localhost:8080/api/v1/book-club/${bookClubId}/event`;
@@ -171,10 +171,61 @@ async function crearReunionMeet(bookClubId, summary, descripcion, fechaHoraInici
         }
         const responseData = await response.json();
         alert("La reunion ha sido agendada exitosamente");
-        window.location.assign('showBookReviewDetails.html');
+        window.location.assign('showBookClubsDetails.html');
     } catch (error) {
         console.error("Error al generar la reunion:", error);
         throw error;
+    }
+}
+
+// Función para actualizar asistentes
+async function actualizaAsistentes() {
+    const data = await getEventData();
+    if (data) {
+        await updateEventData(data);
+    }
+}
+
+// Función para obtener los datos de una reunion
+async function getEventData() {
+    const bookClubId = localStorage.getItem('bookClubId');
+    const url = `http://localhost:8080/api/v1/book-club/${bookClubId}/event`;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Error al obtener los datos: ${response.status} - ${response.statusText}`);
+        }
+        const data = await response.json();
+        alert("Datos obtenidos correctamente")
+        console.log("Datos obtenidos:", data);
+        return data;
+    } catch (error) {
+        alert("Error al obtener los datos")
+        console.error(error);
+    }
+}
+
+// Función para actualizar los datos de una reunion
+async function updateEventData(data) {
+    const bookClubId = localStorage.getItem('bookClubId');
+    const url = `http://localhost:8080/api/v1/book-club/${bookClubId}/event`;
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data.data),
+        });
+        if (!response.ok) {
+            throw new Error(`Error al actualizar los datos: ${response.status} - ${response.statusText}`);
+        }
+        const updatedData = await response.json();
+        alert("Datos actualizados correctamente")
+        console.log("Datos actualizados correctamente:", updatedData);
+    } catch (error) {
+        alert("Error en la actualización de los datos")
+        console.error(error);
     }
 }
 
@@ -196,7 +247,7 @@ function fetchBookReviewDataAndRenderTable() {
             const filteredData = data.data.filter(item => item.bookClubId == clubId);
             // Crear la tabla con Grid.js utilizando los datos filtrados
             const table = new gridjs.Grid({
-                columns: ['Titulo del libro', 'Puntacion', 'Fecha de creación', 'Detalles'],
+                columns: ['Título del libro', 'Puntuación', 'Fecha de creación', 'Detalles'],
                 data: filteredData.map(item => [
                     item.bookTitle,
                     item.rating,
@@ -526,68 +577,77 @@ async function crearReseña(bookTitle, review, rating, createdAt, userId, bookCl
 
 // Función para enviar los datos para actualizar una reseña existente
 async function actualizarReseña(bookReviewId, bookTitle, review, rating, createdAt, userId, bookClubId) {
-    try {
-        const url = `http://localhost:8080/api/v1/book-review/`;
-        const data = {
-            bookReviewId: bookReviewId,
-            bookTitle: bookTitle,
-            review: review,
-            rating: rating,
-            createdAt: createdAt,
-            userId: userId,
-            bookClubId: bookClubId
-        };
+    if (userId == localStorage.getItem(userId)) {
+        try {
+            const url = `http://localhost:8080/api/v1/book-review/`;
+            const data = {
+                bookReviewId: bookReviewId,
+                bookTitle: bookTitle,
+                review: review,
+                rating: rating,
+                createdAt: createdAt,
+                userId: userId,
+                bookClubId: bookClubId
+            };
 
-        const response = await fetch(url, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
+            const response = await fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
 
-        if (!response.ok) {
-            throw new Error(`Error al actualizar la reseña. Estado HTTP: ${response.status}`);
+            if (!response.ok) {
+                throw new Error(`Error al actualizar la reseña. Estado HTTP: ${response.status}`);
+            }
+            const responseData = await response.json();
+            alert("Su reseña ha sido actualizada");
+            window.location.assign('showBookReviewDetails.html');
+            return responseData; // Devuelve los datos de la reseña actualizada
+        } catch (error) {
+            console.error("Error al actualizar la reseña:", error);
+            throw error; // Re-lanzar el error para que se maneje fuera de esta función si es necesario
         }
-        const responseData = await response.json();
-        alert("Su reseña ha sido actualizada");
-        window.location.assign('reviews/showBookReviewDetails.html');
-        return responseData; // Devuelve los datos de la reseña actualizada
-    } catch (error) {
-        console.error("Error al actualizar la reseña:", error);
-        throw error; // Re-lanzar el error para que se maneje fuera de esta función si es necesario
     }
+    else alert("No tiene permisos para modificar esta reseña");
 }
 
 // Función para eliminar una reseña existente
 async function eliminarReseña(bookReviewId) {
-    try {
-        const url = `http://localhost:8080/api/v1/book-review/${bookReviewId}`;
+    const dueñoReview = localStorage.getItem(`dueñoReview`)
+    if (dueñoReview == localStorage.getItem(`userId`)) {
+        try {
+            const url = `http://localhost:8080/api/v1/book-review/${bookReviewId}`;
 
-        const response = await fetch(url, {
-            method: 'DELETE'
-        });
+            const response = await fetch(url, {
+                method: 'DELETE'
+            });
 
-        if (!response.ok) {
-            throw new Error(`Error al eliminar la reseña. Estado HTTP: ${response.status}`);
+            if (!response.ok) {
+                throw new Error(`Error al eliminar la reseña. Estado HTTP: ${response.status}`);
+            }
+            alert("Su reseña ha sido eliminada exitosamente");
+            window.location.assign('reviews.html');
+            const responseData = await response.json();
+            return responseData; // Devuelve los datos de la reseña eliminada
+        } catch (error) {
+            console.error("Error al eliminar la reseña:", error);
+            throw error; // Re-lanzar el error para que se maneje fuera de esta función si es necesario
         }
-
-        const responseData = await response.json();
-        return responseData; // Devuelve los datos de la reseña eliminada
-    } catch (error) {
-        console.error("Error al eliminar la reseña:", error);
-        throw error; // Re-lanzar el error para que se maneje fuera de esta función si es necesario
     }
+    else alert("No tiene permisos para eliminar esta reseña");
+    window.location.assign('reviews.html');
 }
 
-//////////////////////////////////////////////// USER FUCTIONS ///////////////////////////////////////////////////
+//////////////////////////////////////////////// USER FUNCIONES ///////////////////////////////////////////////////
 
 //ACTUALIZAR PERFIL
 async function actualizarPerfil(username, pictureUrl, email, password) {
     try {
         const userId = localStorage.getItem('userId');
         const role = localStorage.getItem('role');
-console.log( password)
+        console.log(password)
         const url = `http://localhost:8080/api/v1/user/`;
         const data = {
             userId: userId,
@@ -609,13 +669,12 @@ console.log( password)
             throw new Error(`Error al crear la reseña. Estado HTTP: ${response.status}`);
         }
         const responseData = await response.json();
-        return responseData; 
+        return responseData;
     } catch (error) {
         console.error("Usuario no encontrado", error);
-        throw error; 
+        throw error;
     }
 }
-
 
 //UNIRSE A UN CLUB 
 function unirseClub() {
@@ -644,7 +703,7 @@ function unirseClub() {
         })
 }
 
-//////////////////////////////////////////////// VALIDACION ROLES ///////////////////////////////////////////////////
+//////////////////////////////////////////////// VALIDACIÓN ROLES ///////////////////////////////////////////////////
 
 // Función para validar el rol del usuario
 function validarYRedirigir(url) {
@@ -664,7 +723,7 @@ function obtenerRolDelUsuario() {
     return rolUsuario
 }
 
-//////////////////////////////////////////// Importacion nav y footer ///////////////////////////////////////////////////////////
+//////////////////////////////////////////// Importación nav y footer ///////////////////////////////////////////////////////////
 
 // Cargar el archivo HTML en el elemento con el ID especificado
 function loadHTML(url, elementId) {
@@ -693,3 +752,48 @@ function redirigir(destino) {
 }
 
 
+// function para ocultar campos según el rol
+function ocultarBotonesSegunRol() {
+    const role = obtenerRolDelUsuario();
+    console.log(role)
+    const adminButtons = document.querySelectorAll('.adminButton');
+    if (role === 'ADMIN') {
+        adminButtons.forEach(button => {
+            button.style.display = 'flex'; // Muestra los botones de administrador
+        });
+    } else {
+        adminButtons.forEach(button => {
+            button.style.display = 'none'; // Asegura que estén ocultos
+        });
+    }
+    console.log(role)
+    const admincontainer = document.querySelectorAll('.container-admin');
+    if (role === 'ADMIN') {
+        admincontainer.forEach(div => {
+            div.style.display = 'flex'; // Muestra los botones de administrador
+        });
+    } else {
+        console.log("estoy ocultando botones")
+        admincontainer.forEach(div => {
+            div.style.display = 'none'; // Asegura que estén ocultos
+        });
+    }
+
+}
+
+function ocultarItemNavSegunRol() {
+    const role = obtenerRolDelUsuario();
+    const navAdmin = document.querySelectorAll('#nav-admin');
+    if (role === 'ADMIN') {
+        navAdmin.forEach(nav => {
+            nav.style.display = 'flex'; // Muestra los botones de administrador
+        });
+    } else {
+        console.log("estoy ocultando nav items")
+        navAdmin.forEach(nav => {
+            nav.style.display = 'none'; // Asegura que estén ocultos
+        });
+    }
+}
+// Llama a la función con el rol del usuario
+ocultarBotonesSegunRol();
