@@ -10,9 +10,8 @@ header img {
 }
 
 main {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 40px;
+    background-image:url(/assets/Biblioteca-background.jpeg);
+    background-size: cover; 
     /* Asegura que el body ocupe al menos el 100% de la altura de la ventana */
 
     /* Elimina el margen predeterminado del body */
@@ -217,15 +216,14 @@ td {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 12px;
 }
 
 #container-form {
     display: flex;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 20px;
 }
+
 
 .form-base {
     margin-top: 10px;
